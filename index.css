@@ -634,7 +634,7 @@ img {
 
 .project-images {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
   margin-bottom: 1.5rem;
   position: relative;
@@ -1156,7 +1156,7 @@ img {
 
   /* Project images */
   .project-images {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 0.75rem;
   }
 
