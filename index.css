@@ -119,23 +119,7 @@ img {
   padding: 0 2rem;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-}
-
-.nav-logo {
-  font-family: var(--font-heading);
-  font-size: 1.5rem;
-  font-weight: 800;
-  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  letter-spacing: -0.02em;
-  transition: opacity 0.3s ease;
-}
-
-.nav-logo:hover {
-  opacity: 0.8;
+  justify-content: flex-end;
 }
 
 .nav-menu {
@@ -880,6 +864,106 @@ img {
 
 
 /* ===================================
+   PROJECT DESIGN REPORTS (scrollable viewer + download)
+   =================================== */
+.project-reports {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.reports-caption {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.25rem;
+}
+
+.reports-row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.report-viewer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+  width: 400px;
+  max-width: 100%;
+}
+
+.report-viewer-tag {
+  align-self: flex-start;
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--project-accent, var(--accent-blue));
+}
+
+.report-viewer object {
+  width: 100%;
+  height: 560px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  background: #525659;
+  transition: border-color 0.3s ease;
+}
+
+.report-viewer:hover object {
+  border-color: rgba(0, 180, 216, 0.35);
+}
+
+.report-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 1.5rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.report-fallback a {
+  color: var(--accent-blue);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.report-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--accent-blue);
+  padding: 0.5rem 1.1rem;
+  border: 1.5px solid var(--accent-blue);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.report-download:hover {
+  background: var(--accent-blue);
+  color: var(--bg-primary);
+  box-shadow: 0 0 20px rgba(0, 180, 216, 0.25);
+}
+
+.report-download svg {
+  flex-shrink: 0;
+}
+
+
+/* ===================================
    SKILLS SECTION
    =================================== */
 .skills-section {
@@ -1128,5 +1212,13 @@ img {
   .edu-badge {
     font-size: 0.72rem;
     padding: 0.25rem 0.6rem;
+  }
+
+  .reports-row {
+    gap: 1.75rem;
+  }
+
+  .report-viewer object {
+    height: 440px;
   }
 }
