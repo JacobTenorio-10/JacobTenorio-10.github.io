@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jacob Tenorio | Mechanical &amp; Aerospace Engineer</title>
+  <meta name="description" content="Portfolio of Jacob Tenorio — Mechanical Engineering B.S. and Aerospace Engineering M.S. student at Washington University in St. Louis. Showcasing projects in aircraft design, CFD/FEA, thermal systems, and autonomous robotics.">
+  <meta property="og:title" content="Jacob Tenorio | Mechanical & Aerospace Engineer">
+  <meta property="og:description" content="Mechanical & Aerospace Engineering student at Washington University in St. Louis. Aircraft design, CFD/FEA, thermal systems, and autonomous robotics.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <!-- Hidden SVG Defs for streamline gradients -->
+  <svg style="position:absolute;width:0;height:0;" aria-hidden="true">
+    <defs>
+      <linearGradient id="stream-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#0077b6" stop-opacity="0"/>
+        <stop offset="40%" stop-color="#00b4d8" stop-opacity="0.5"/>
+        <stop offset="60%" stop-color="#00f0ff" stop-opacity="0.5"/>
+        <stop offset="100%" stop-color="#ff6b35" stop-opacity="0"/>
+      </linearGradient>
+      <linearGradient id="stream-gradient-alt" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#00f0ff" stop-opacity="0"/>
+        <stop offset="50%" stop-color="#0077b6" stop-opacity="0.4"/>
+        <stop offset="100%" stop-color="#ff6b35" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <!-- Particle Flow Field Canvas -->
+  <canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+  <!-- Navigation -->
+  <nav id="navbar" class="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="nav-logo" id="nav-logo">JT</a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation menu">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+      <ul id="nav-menu" class="nav-menu">
+        <li><a href="#about" class="nav-link" id="nav-about">About</a></li>
+        <li><a href="#projects" class="nav-link" id="nav-projects">Projects</a></li>
+        <li><a href="#skills" class="nav-link" id="nav-skills">Skills</a></li>
+        <li><a href="#contact" class="nav-link" id="nav-contact">Contact</a></li>
+        <li><a href="assets/Jacob_Tenorio_Resume.pdf" class="nav-resume-btn" id="nav-resume" target="_blank" rel="noopener noreferrer">Resume</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ==================== HERO ==================== -->
+    <section id="hero" class="hero-section">
+      <div class="hero-content">
+        <p class="hero-greeting scroll-reveal">Hello, I'm</p>
+        <h1 class="hero-name" id="hero-name">Jacob Tenorio</h1>
+        <div class="hero-divider"></div>
+        <p class="hero-subtitle scroll-reveal">Mechanical Engineering B.S. · Aerospace Engineering M.S.</p>
+        <p class="hero-school scroll-reveal">Washington University in St. Louis</p>
+      </div>
+      <a href="#about" class="scroll-cta" id="scroll-cta" aria-label="Scroll to About section">
+        <svg class="scroll-arrow" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
+        </svg>
+      </a>
+    </section>
+
+    <!-- Streamline Divider -->
+    <div class="streamline-divider" aria-hidden="true">
+      <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+        <path class="streamline-path" d="M0,40 C240,15 480,65 720,40 C960,15 1200,65 1440,40" stroke="url(#stream-gradient)" fill="none" stroke-width="1.5"/>
+        <path class="streamline-path" d="M0,50 C360,20 600,70 900,35 C1100,15 1300,60 1440,45" stroke="url(#stream-gradient-alt)" fill="none" stroke-width="1" opacity="0.6"/>
+        <path class="streamline-path" d="M0,30 C200,55 500,20 800,50 C1000,65 1300,25 1440,35" stroke="url(#stream-gradient)" fill="none" stroke-width="0.6" opacity="0.3"/>
+      </svg>
+    </div>
+
+    <!-- ==================== ABOUT ==================== -->
+    <section id="about" class="about-section">
+      <div class="section-container">
+        <h2 class="section-title scroll-reveal">About Me</h2>
+        <div class="about-grid">
+
+          <div class="about-bio glass-card scroll-reveal">
+            <p>I entered the corporate world through the Corporate Work Study Program (CWSP) at Cristo Rey St. Martin, interning at Underwriters Laboratories, AbbVie, and working as an elementary school teaching assistant.</p>
+            <p>I am experienced in approaching unfamiliar fields, such as cybersecurity (@ UL) and call center technology (@ AbbVie). Additionally, I've worked to inspire an interest in STEM among younger students through my work as a teaching assistant.</p>
+            <p>I am currently pursuing a bachelor's degree in mechanical engineering with a focus in aerospace engineering at Washington University.</p>
+            <p>Interested in the exciting developments in the aerospace and aeronautical industry!</p>
+          </div>
+
+          <div class="about-education glass-card scroll-reveal">
+            <h3 class="card-heading">Education</h3>
+            <div class="edu-item">
+              <span class="edu-school">Washington University in St. Louis</span>
+              <span class="edu-date">Expected May 2027</span>
+            </div>
+            <p class="edu-degree">B.S. in Mechanical Engineering</p>
+            <div class="edu-highlights">
+              <span class="edu-badge">Germany Ballintyn Scholar</span>
+              <span class="edu-badge">GPA: 3.51</span>
+              <span class="edu-badge">Dean's List</span>
+            </div>
+            <p class="edu-coursework"><strong>Relevant Coursework:</strong> Fluid &amp; Solid Mechanics, Heat Transfer, Thermal Systems Design, Machine Elements, Numerical Methods</p>
+
+            <a href="assets/Jacob_Tenorio_Resume.pdf" class="resume-btn" id="download-resume" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+              Download Resume
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Streamline Divider -->
+    <div class="streamline-divider" aria-hidden="true">
+      <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+        <path class="streamline-path" d="M0,45 C300,10 600,70 900,30 C1100,10 1350,60 1440,40" stroke="url(#stream-gradient)" fill="none" stroke-width="1.5"/>
+        <path class="streamline-path" d="M0,35 C200,60 450,15 750,55 C1000,75 1250,20 1440,40" stroke="url(#stream-gradient-alt)" fill="none" stroke-width="1" opacity="0.5"/>
+      </svg>
+    </div>
+
+    <!-- ==================== PROJECTS ==================== -->
+    <section id="projects" class="projects-section">
+      <div class="section-container">
+        <h2 class="section-title scroll-reveal">Projects</h2>
+
+        <!-- Project 1: Multi-Mission Competition Aircraft -->
+        <article class="project-card glass-card scroll-reveal" id="project-aircraft" style="--project-accent: #00b4d8;">
+          <div class="project-header">
+            <h3 class="project-title">Multi-Mission Competition Aircraft</h3>
+            <div class="project-tags">
+              <span class="project-tag">AIAA Design/Build/Fly</span>
+              <span class="project-tag">SolidWorks</span>
+              <span class="project-tag">CFD</span>
+              <span class="project-tag">FEA</span>
+            </div>
+          </div>
+          <div class="project-images">
+            <div class="image-carousel" data-dir="assets/images/aircraft/cad" data-icon="✈" data-label="CAD Model">
+              <div class="carousel-viewport" tabindex="0"><div class="carousel-track"></div></div>
+              <button class="carousel-arrow carousel-arrow-prev" type="button" aria-label="Previous image">‹</button>
+              <button class="carousel-arrow carousel-arrow-next" type="button" aria-label="Next image">›</button>
+              <div class="carousel-meta"><div class="carousel-dots"></div><span class="carousel-counter"></span></div>
+            </div>
+            <div class="image-carousel" data-dir="assets/images/aircraft/cfd" data-icon="🌊" data-label="CFD Analysis">
+              <div class="carousel-viewport" tabindex="0"><div class="carousel-track"></div></div>
+              <button class="carousel-arrow carousel-arrow-prev" type="button" aria-label="Previous image">‹</button>
+              <button class="carousel-arrow carousel-arrow-next" type="button" aria-label="Next image">›</button>
+              <div class="carousel-meta"><div class="carousel-dots"></div><span class="carousel-counter"></span></div>
+            </div>
+            <div class="image-carousel" data-dir="assets/images/aircraft/photo" data-icon="📷" data-label="Flight Photo">
+              <div class="carousel-viewport" tabindex="0"><div class="carousel-track"></div></div>
+              <button class="carousel-arrow carousel-arrow-prev" type="button" aria-label="Previous image">‹</button>
+              <button class="carousel-arrow carousel-arrow-next" type="button" aria-label="Next image">›</button>
+              <div class="carousel-meta"><div class="carousel-dots"></div><span class="carousel-counter"></span></div>
+            </div>
+          </div>
+          <div class="project-details">
+            <div class="project-column">
+              <h4>What?</h4>
+              <ul>
+                <li>Designed aircraft for deployment missions (gliders/banners) and heavy cargo (passengers/pylons)</li>
+                <li>Balanced high-lift capacity with low structural weight</li>
+                <li>Lead structures and testing teams designing competition-compliant aircraft via SolidWorks top-down modeling</li>
+              </ul>
+            </div>
+            <div class="project-column">
+              <h4>How?</h4>
+              <ul>
+                <li>Modeled aircraft in <strong>SolidWorks</strong> using top-down modeling</li>
+                <li>Integrated carbon fiber (spars), balsa (ribs), <strong>3D-printed</strong> PLA (complex mounts), and <strong>CNC</strong> machined parts (wingbox)</li>
+                <li>Validated structural integrity (<strong>FEA</strong>) and aerodynamic performance (<strong>CFD</strong>)</li>
+                <li>Designed mission-specific components (removable wings, deployable glider, cargo &amp; passenger compartments)</li>
+              </ul>
+            </div>
+            <div class="project-column">
+              <h4>Results</h4>
+              <ul>
+                <li>Placed <strong>35th of 114</strong> in international AIAA competition</li>
+                <li>Achieved <strong>100%</strong> structural success rate with no components failing during flight</li>
+                <li>Reduced new-member CAD training time by <strong>50%</strong> by designing an onboarding curriculum</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 2: Glider Deployment Mechanism -->
+        <article class="project-card glass-card scroll-reveal" id="project-glider" style="--project-accent: #0077b6;">
+          <div class="project-header">
+            <h3 class="project-title">Glider Deployment Mechanism</h3>
+            <div class="project-tags">
+              <span class="project-tag">Aerospace</span>
+              <span class="project-tag">SolidWorks</span>
+              <span class="project-tag">FEA</span>
+              <span class="project-tag">3D Printing</span>
+            </div>
+          </div>
+          <div class="project-images">
+            <div class="image-carousel" data-dir="assets/images/glider/cad" data-icon="🔧" data-label="CAD Assembly">
+              <div class="carousel-viewport" tabindex="0"><div class="carousel-track"></div></div>
+              <button class="carousel-arrow carousel-arrow-prev" type="button" aria-label="Previous image">‹</button>
+              <button class="carousel-arrow carousel-arrow-next" type="button" aria-label="Next image">›</button>
+              <div class="carousel-meta"><div class="carousel-dots"></div><span class="carousel-counter"></span></div>
+            </div>
+            <div class="image-carousel" data-dir="assets/images/glider/iteration" data-icon="📐" data-label="Design Iteration">
+              <div class="carousel-viewport" tabindex="0"><div class="carousel-track"></div></div>
+              <button class="carousel-arrow carousel-arrow-prev" type="button" aria-label="Previous image">‹</button>
+              <button class="carousel-arrow carousel-arrow-next" type="button" aria-label="Next image">›</button>
+              <div class="carousel-meta"><div class="carousel-dots"></div><span class="carousel-counter"></span></div>
+            </div>
+            <div class="image-carousel" data-dir="assets/images/glider/print" data-icon="🖨" data-label="3D Print">
+              <div class="carousel-viewport" tabindex="0"><div class="carousel-track"></div></div>
+              <button class="carousel-arrow carousel-arrow-prev" type="button" aria-label="Previous image">‹</button>
+              <button class="carousel-arrow carousel-arrow-next" type="button" aria-label="Next image">›</button>
+              <div class="carousel-meta"><div class="carousel-dots"></div><span class="carousel-counter"></span></div>
+            </div>
+          </div>
+          <div class="project-details">
+            <div class="project-column">
+              <h4>What?</h4>
+              <ul>
+                <li>Designed lightweight release mechanism for mid-flight glider deployment</li>
+                <li>Optimized for small-scale geometry and minimal weight impact on parent aircraft</li>
+              </ul>
+            </div>
+            <div class="project-column">
+              <h4>How?</h4>
+              <ul>
+                <li>Developed multiple <strong>SolidWorks</strong> designs, utilizing <strong>3D-printed</strong> PLA to test and refine release efficiency</li>
+                <li>Engineered a one-step release mechanism to eliminate mechanical <strong>failure points</strong> and ensure mission reliability</li>
+                <li>Performed stress analysis via SolidWorks <strong>FEA</strong> to identify critical points</li>
+              </ul>
+            </div>
+            <div class="project-column">
+              <h4>Results</h4>
+              <ul>
+                <li>Achieved <strong>jam-free release</strong> during Design/Build/Fly competition</li>
+                <li>Simplified design proved effective under real-world flight vibrations and loads</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 3: Autonomous Ambulance -->
+        <article class="project-card glass-card scroll-reveal" id="project-ambulance" style="--project-accent: #ff6b35;">
+          <div class="project-header">
+            <h3 class="project-title">Autonomous Ambulance</h3>
+            <div class="project-tags">
+              <span class="project-tag">Robotics</span>
+              <span class="project-tag">Arduino</span>
+              <span class="project-tag">C++</span>
+              <span class="project-tag">SolidWorks</span>
+            </div>
+          </div>
+          <div class="project-images">
+            <div class="image-carousel" data-dir="assets/images/ambulance/flowchart" data-icon="📊" data-label="System Flowchart">
+              <div class="carousel-viewport" tabindex="0"><div class="carousel-track"></div></div>
+              <button class="carousel-arrow carousel-arrow-prev" type="button" aria-label="Previous image">‹</button>
+              <button class="carousel-arrow carousel-arrow-next" type="button" aria-label="Next image">›</button>
+              <div class="carousel-meta"><div class="carousel-dots"></div><span class="carousel-counter"></span></div>
+            </div>
+            <div class="image-carousel" data-dir="assets/images/ambulance/circuitry" data-icon="⚡" data-label="Circuitry">
+              <div class="carousel-viewport" tabindex="0"><div class="carousel-track"></div></div>
+              <button class="carousel-arrow carousel-arrow-prev" type="button" aria-label="Previous image">‹</button>
+              <button class="carousel-arrow carousel-arrow-next" type="button" aria-label="Next image">›</button>
+              <div class="carousel-meta"><div class="carousel-dots"></div><span class="carousel-counter"></span></div>
+            </div>
+            <div class="image-carousel" data-dir="assets/images/ambulance/vehicle" data-icon="🚑" data-label="Finished Vehicle">
+              <div class="carousel-viewport" tabindex="0"><div class="carousel-track"></div></div>
+              <button class="carousel-arrow carousel-arrow-prev" type="button" aria-label="Previous image">‹</button>
+              <button class="carousel-arrow carousel-arrow-next" type="button" aria-label="Next image">›</button>
+              <div class="carousel-meta"><div class="carousel-dots"></div><span class="carousel-counter"></span></div>
+            </div>
+          </div>
+          <div class="project-details">
+            <div class="project-column">
+              <h4>What?</h4>
+              <ul>
+                <li>Developed autonomous driving system with collision avoidance, adaptive siren logic, and patient transport ability</li>
+                <li>Focused on reducing vehicle weight and project overhead</li>
+              </ul>
+            </div>
+            <div class="project-column">
+              <h4>How?</h4>
+              <ul>
+                <li>Modeled chassis in <strong>SolidWorks</strong></li>
+                <li>Developed <strong>C++</strong> control firmware for <strong>Arduino</strong> microcontroller and implemented associated circuitry</li>
+                <li>Integrated <strong>ultrasonic (sonar) sensors</strong> for autonomous navigation and obstacle avoidance</li>
+                <li>Implemented functional emergency lights and sirens</li>
+              </ul>
+            </div>
+            <div class="project-column">
+              <h4>Results</h4>
+              <ul>
+                <li>Achieved full vehicle autonomy</li>
+                <li>Demonstrated <strong>100%</strong> obstacle avoidance success</li>
+                <li>Validated patient transport capabilities</li>
+                <li>Reduced chassis weight by <strong>50%</strong> via design optimization</li>
+                <li>Completed project <strong>30%</strong> under budget</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 4: Flood Disaster Model -->
+        <article class="project-card glass-card scroll-reveal" id="project-flood" style="--project-accent: #00a896;">
+          <div class="project-header">
+            <h3 class="project-title">Flood Disaster Model</h3>
+            <div class="project-tags">
+              <span class="project-tag">Army Corps of Engineers</span>
+              <span class="project-tag">CFD</span>
+              <span class="project-tag">SolidWorks</span>
+              <span class="project-tag">3D Printing</span>
+            </div>
+          </div>
+          <div class="project-images">
+            <div class="image-carousel" data-dir="assets/images/flood/cfd" data-icon="🌊" data-label="CFD Simulation">
+              <div class="carousel-viewport" tabindex="0"><div class="carousel-track"></div></div>
+              <button class="carousel-arrow carousel-arrow-prev" type="button" aria-label="Previous image">‹</button>
+              <button class="carousel-arrow carousel-arrow-next" type="button" aria-label="Next image">›</button>
+              <div class="carousel-meta"><div class="carousel-dots"></div><span class="carousel-counter"></span></div>
+            </div>
+            <div class="image-carousel" data-dir="assets/images/flood/cad" data-icon="📐" data-label="CAD Model">
+              <div class="carousel-viewport" tabindex="0"><div class="carousel-track"></div></div>
+              <button class="carousel-arrow carousel-arrow-prev" type="button" aria-label="Previous image">‹</button>
+              <button class="carousel-arrow carousel-arrow-next" type="button" aria-label="Next image">›</button>
+              <div class="carousel-meta"><div class="carousel-dots"></div><span class="carousel-counter"></span></div>
+            </div>
+            <div class="image-carousel" data-dir="assets/images/flood/print" data-icon="🖨" data-label="PETG Prototype">
+              <div class="carousel-viewport" tabindex="0"><div class="carousel-track"></div></div>
+              <button class="carousel-arrow carousel-arrow-prev" type="button" aria-label="Previous image">‹</button>
+              <button class="carousel-arrow carousel-arrow-next" type="button" aria-label="Next image">›</button>
+              <div class="carousel-meta"><div class="carousel-dots"></div><span class="carousel-counter"></span></div>
+            </div>
+          </div>
+          <div class="project-details">
+            <div class="project-column">
+              <h4>What?</h4>
+              <ul>
+                <li>Designed model to simulate water propagation following a catastrophic levee failure</li>
+                <li>Focused on creating model that accurately replicates fluid behavior</li>
+              </ul>
+            </div>
+            <div class="project-column">
+              <h4>How?</h4>
+              <ul>
+                <li>Used <strong>SolidWorks CFD</strong> to optimize design for maximum flow realism</li>
+                <li>Sliced and printed final design via <strong>3DprinterOS</strong></li>
+              </ul>
+            </div>
+            <div class="project-column">
+              <h4>Results</h4>
+              <ul>
+                <li>Produced <strong>3D-printed PETG</strong> prototype for physical validation and testing</li>
+                <li>Delivered validated design and fabrication-ready files to subsequent development team</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 5: HVAC Refrigerant Cycle Simulation -->
+        <article class="project-card glass-card scroll-reveal" id="project-hvac" style="--project-accent: #e8651a;">
+          <div class="project-header">
+            <h3 class="project-title">Automotive HVAC Refrigerant Cycle Simulation</h3>
+            <div class="project-tags">
+              <span class="project-tag">Thermodynamics</span>
+              <span class="project-tag">Python</span>
+              <span class="project-tag">TEWI Analysis</span>
+            </div>
+          </div>
+          <div class="project-images">
+            <div class="image-carousel" data-dir="assets/images/hvac/diagram" data-icon="🔥" data-label="Cycle Diagram">
+              <div class="carousel-viewport" tabindex="0"><div class="carousel-track"></div></div>
+              <button class="carousel-arrow carousel-arrow-prev" type="button" aria-label="Previous image">‹</button>
+              <button class="carousel-arrow carousel-arrow-next" type="button" aria-label="Next image">›</button>
+              <div class="carousel-meta"><div class="carousel-dots"></div><span class="carousel-counter"></span></div>
+            </div>
+            <div class="image-carousel" data-dir="assets/images/hvac/cop" data-icon="📈" data-label="COP Optimization">
+              <div class="carousel-viewport" tabindex="0"><div class="carousel-track"></div></div>
+              <button class="carousel-arrow carousel-arrow-prev" type="button" aria-label="Previous image">‹</button>
+              <button class="carousel-arrow carousel-arrow-next" type="button" aria-label="Next image">›</button>
+              <div class="carousel-meta"><div class="carousel-dots"></div><span class="carousel-counter"></span></div>
+            </div>
+            <div class="image-carousel" data-dir="assets/images/hvac/tewi" data-icon="🌍" data-label="TEWI Results">
+              <div class="carousel-viewport" tabindex="0"><div class="carousel-track"></div></div>
+              <button class="carousel-arrow carousel-arrow-prev" type="button" aria-label="Previous image">‹</button>
+              <button class="carousel-arrow carousel-arrow-next" type="button" aria-label="Next image">›</button>
+              <div class="carousel-meta"><div class="carousel-dots"></div><span class="carousel-counter"></span></div>
+            </div>
+          </div>
+          <div class="project-details">
+            <div class="project-column">
+              <h4>What?</h4>
+              <ul>
+                <li>Modeled four automotive refrigerants across conventional and transcritical vapor-compression cycles in Python</li>
+                <li>Investigated lifecycle environmental impact of refrigerant selection</li>
+              </ul>
+            </div>
+            <div class="project-column">
+              <h4>How?</h4>
+              <ul>
+                <li>Built simulation in <strong>Python</strong> covering conventional and transcritical vapor-compression cycles</li>
+                <li>Optimized CO₂/R-744 transcritical high-side pressure to maximize COP</li>
+                <li>Balanced cooling capacity against compressor work</li>
+              </ul>
+            </div>
+            <div class="project-column">
+              <h4>Results</h4>
+              <ul>
+                <li>Conducted TEWI analysis revealing <strong>indirect emissions dominate</strong> climate impact</li>
+                <li>Found near-zero GWP insufficient to minimize total environmental footprint</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 6: Radial Heat Conduction -->
+        <article class="project-card glass-card scroll-reveal" id="project-turbine" style="--project-accent: #00f0ff;">
+          <div class="project-header">
+            <h3 class="project-title">Radial Heat Conduction in a Micro-Turbine Disk</h3>
+            <div class="project-tags">
+              <span class="project-tag">Heat Transfer</span>
+              <span class="project-tag">COMSOL</span>
+              <span class="project-tag">FEA</span>
+            </div>
+          </div>
+          <div class="project-images">
+            <div class="image-carousel" data-dir="assets/images/turbine/comsol" data-icon="🔥" data-label="COMSOL Model">
+              <div class="carousel-viewport" tabindex="0"><div class="carousel-track"></div></div>
+              <button class="carousel-arrow carousel-arrow-prev" type="button" aria-label="Previous image">‹</button>
+              <button class="carousel-arrow carousel-arrow-next" type="button" aria-label="Next image">›</button>
+              <div class="carousel-meta"><div class="carousel-dots"></div><span class="carousel-counter"></span></div>
+            </div>
+            <div class="image-carousel" data-dir="assets/images/turbine/temp" data-icon="📊" data-label="Temperature Profile">
+              <div class="carousel-viewport" tabindex="0"><div class="carousel-track"></div></div>
+              <button class="carousel-arrow carousel-arrow-prev" type="button" aria-label="Previous image">‹</button>
+              <button class="carousel-arrow carousel-arrow-next" type="button" aria-label="Next image">›</button>
+              <div class="carousel-meta"><div class="carousel-dots"></div><span class="carousel-counter"></span></div>
+            </div>
+            <div class="image-carousel" data-dir="assets/images/turbine/parametric" data-icon="⚙" data-label="Parametric Study">
+              <div class="carousel-viewport" tabindex="0"><div class="carousel-track"></div></div>
+              <button class="carousel-arrow carousel-arrow-prev" type="button" aria-label="Previous image">‹</button>
+              <button class="carousel-arrow carousel-arrow-next" type="button" aria-label="Next image">›</button>
+              <div class="carousel-meta"><div class="carousel-dots"></div><span class="carousel-counter"></span></div>
+            </div>
+          </div>
+          <div class="project-details">
+            <div class="project-column">
+              <h4>What?</h4>
+              <ul>
+                <li>Simulated steady-state radial conduction in a micro-turbine disk</li>
+                <li>Evaluated superalloy materials for turbine shaft thermal protection</li>
+              </ul>
+            </div>
+            <div class="project-column">
+              <h4>How?</h4>
+              <ul>
+                <li>Built <strong>COMSOL</strong> axisymmetric model with fixed rim temperature, forced convection, and lubricant cooling BCs</li>
+                <li>Validated against Bessel fin analytical solution</li>
+                <li>Performed parametric study and mesh independence testing across 3 superalloys</li>
+              </ul>
+            </div>
+            <div class="project-column">
+              <h4>Results</h4>
+              <ul>
+                <li>Confirmed <strong>&lt;6%</strong> deviation between COMSOL and analytical solution</li>
+                <li>Identified <strong>René 41</strong> as optimal material for shaft thermal protection</li>
+                <li>Demonstrated mesh-independent convergence</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 7: CCGT Marine Propulsion -->
+        <article class="project-card glass-card scroll-reveal" id="project-ccgt" style="--project-accent: #8338ec;">
+          <div class="project-header">
+            <h3 class="project-title">CCGT Marine Propulsion System Design</h3>
+            <div class="project-tags">
+              <span class="project-tag">Thermal Systems</span>
+              <span class="project-tag">MATLAB</span>
+              <span class="project-tag">Python</span>
+            </div>
+          </div>
+          <div class="project-images">
+            <div class="image-carousel" data-dir="assets/images/ccgt/brayton" data-icon="⚙" data-label="Brayton Cycle">
+              <div class="carousel-viewport" tabindex="0"><div class="carousel-track"></div></div>
+              <button class="carousel-arrow carousel-arrow-prev" type="button" aria-label="Previous image">‹</button>
+              <button class="carousel-arrow carousel-arrow-next" type="button" aria-label="Next image">›</button>
+              <div class="carousel-meta"><div class="carousel-dots"></div><span class="carousel-counter"></span></div>
+            </div>
+            <div class="image-carousel" data-dir="assets/images/ccgt/rankine" data-icon="💧" data-label="Rankine Cycle">
+              <div class="carousel-viewport" tabindex="0"><div class="carousel-track"></div></div>
+              <button class="carousel-arrow carousel-arrow-prev" type="button" aria-label="Previous image">‹</button>
+              <button class="carousel-arrow carousel-arrow-next" type="button" aria-label="Next image">›</button>
+              <div class="carousel-meta"><div class="carousel-dots"></div><span class="carousel-counter"></span></div>
+            </div>
+            <div class="image-carousel" data-dir="assets/images/ccgt/hrsg" data-icon="🔥" data-label="HRSG Design">
+              <div class="carousel-viewport" tabindex="0"><div class="carousel-track"></div></div>
+              <button class="carousel-arrow carousel-arrow-prev" type="button" aria-label="Previous image">‹</button>
+              <button class="carousel-arrow carousel-arrow-next" type="button" aria-label="Next image">›</button>
+              <div class="carousel-meta"><div class="carousel-dots"></div><span class="carousel-counter"></span></div>
+            </div>
+          </div>
+          <div class="project-details">
+            <div class="project-column">
+              <h4>What?</h4>
+              <ul>
+                <li>Designed a combined-cycle gas turbine marine propulsion system</li>
+                <li>Optimized both Brayton and Rankine cycles for maximum efficiency</li>
+              </ul>
+            </div>
+            <div class="project-column">
+              <h4>How?</h4>
+              <ul>
+                <li>Optimized variable-specific-heat Brayton cycle in <strong>MATLAB</strong> via parametric compression ratio and isentropic efficiency sweeps</li>
+                <li>Maximized Rankine efficiency in <strong>Python</strong> via turbine pressure optimization with blade-erosion quality constraint</li>
+                <li>Sized three-stage HRSG via Dittus-Boelter, Zukauskas, Rohsenow correlations, LMTD, and thermal resistance networks</li>
+              </ul>
+            </div>
+            <div class="project-column">
+              <h4>Results</h4>
+              <ul>
+                <li>Delivered optimized combined-cycle system meeting all design constraints</li>
+                <li>Balanced thermodynamic efficiency with practical engineering constraints (blade erosion, quality limits)</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- Streamline Divider -->
+    <div class="streamline-divider" aria-hidden="true">
+      <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+        <path class="streamline-path" d="M0,40 C360,65 720,15 1080,50 C1260,60 1380,30 1440,40" stroke="url(#stream-gradient)" fill="none" stroke-width="1.5"/>
+        <path class="streamline-path" d="M0,50 C240,25 600,65 960,30 C1200,15 1360,55 1440,45" stroke="url(#stream-gradient-alt)" fill="none" stroke-width="1" opacity="0.5"/>
+      </svg>
+    </div>
+
+    <!-- ==================== SKILLS ==================== -->
+    <section id="skills" class="skills-section">
+      <div class="section-container">
+        <h2 class="section-title scroll-reveal">Skills</h2>
+        <div class="skills-grid">
+
+          <div class="skill-category glass-card scroll-reveal">
+            <h3 class="skill-category-title">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+              Technical
+            </h3>
+            <div class="skill-chips">
+              <span class="skill-chip">SolidWorks</span>
+              <span class="skill-chip">Ansys</span>
+              <span class="skill-chip">MATLAB</span>
+              <span class="skill-chip">Python</span>
+              <span class="skill-chip">Java</span>
+              <span class="skill-chip">COMSOL</span>
+              <span class="skill-chip">XFLR5</span>
+              <span class="skill-chip">Arduino</span>
+              <span class="skill-chip">Excel</span>
+            </div>
+          </div>
+
+          <div class="skill-category glass-card scroll-reveal">
+            <h3 class="skill-category-title">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20V10M18 20V4M6 20v-4"/></svg>
+              Methods
+            </h3>
+            <div class="skill-chips">
+              <span class="skill-chip">Computational Fluid Dynamics</span>
+              <span class="skill-chip">Finite Element Analysis</span>
+              <span class="skill-chip">AI-Assisted Workflows</span>
+              <span class="skill-chip">GD&amp;T</span>
+            </div>
+          </div>
+
+          <div class="skill-category glass-card scroll-reveal">
+            <h3 class="skill-category-title">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+              Equipment
+            </h3>
+            <div class="skill-chips">
+              <span class="skill-chip">CNC</span>
+              <span class="skill-chip">Lathe</span>
+              <span class="skill-chip">Mill</span>
+              <span class="skill-chip">Drill Press</span>
+              <span class="skill-chip">Laser Cutter</span>
+              <span class="skill-chip">3D Printing</span>
+              <span class="skill-chip">Band Saw</span>
+              <span class="skill-chip">Soldering</span>
+              <span class="skill-chip">Brazing</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Streamline Divider -->
+    <div class="streamline-divider" aria-hidden="true">
+      <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+        <path class="streamline-path" d="M0,35 C300,60 600,20 900,50 C1100,65 1300,30 1440,40" stroke="url(#stream-gradient)" fill="none" stroke-width="1.5"/>
+        <path class="streamline-path" d="M0,50 C360,25 720,60 1080,35 C1260,20 1380,55 1440,45" stroke="url(#stream-gradient-alt)" fill="none" stroke-width="0.8" opacity="0.4"/>
+      </svg>
+    </div>
+
+    <!-- ==================== CONTACT ==================== -->
+    <section id="contact" class="contact-section">
+      <div class="section-container">
+        <h2 class="section-title scroll-reveal">Get in Touch</h2>
+        <p class="contact-subtitle scroll-reveal">Interested in connecting? I'd love to hear from you.</p>
+        <div class="contact-links scroll-reveal">
+
+          <a href="mailto:jacobtenorio111@gmail.com" class="contact-card glass-card" id="contact-email">
+            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 8L2 4"/></svg>
+            <span class="contact-label">Email</span>
+            <span class="contact-value">jacobtenorio111@gmail.com</span>
+          </a>
+
+          <a href="http://www.linkedin.com/in/jacobtenorio" target="_blank" rel="noopener noreferrer" class="contact-card glass-card" id="contact-linkedin">
+            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            <span class="contact-label">LinkedIn</span>
+            <span class="contact-value">linkedin.com/in/jacobtenorio</span>
+          </a>
+
+          <a href="tel:313-327-8493" class="contact-card glass-card" id="contact-phone">
+            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            <span class="contact-label">Phone</span>
+            <span class="contact-value">313-327-8493</span>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>&copy; 2026 Jacob Tenorio. All rights reserved.</p>
+  </footer>
+
+  <script src="assets/images/manifest.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
