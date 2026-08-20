@@ -531,7 +531,13 @@
       function goTo(i) {
         const wrapped = ((i % count) + count) % count;
         const target = slides[wrapped];
-        target.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        // Scroll only this carousel's own viewport horizontally — scrollIntoView()
+        // can also nudge the page's vertical scroll (e.g. to clear the sticky
+        // navbar), which caused the whole page to jump on every autoplay tick.
+        const viewportRect = viewport.getBoundingClientRect();
+        const targetRect = target.getBoundingClientRect();
+        const delta = (targetRect.left + targetRect.width / 2) - (viewportRect.left + viewportRect.width / 2);
+        viewport.scrollTo({ left: viewport.scrollLeft + delta, behavior: 'smooth' });
         startAutoplay();
       }
 
