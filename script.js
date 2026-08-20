@@ -255,6 +255,15 @@
 
   /* --- Animation loop --- */
   function animateFlow() {
+    // Self-heal: if the canvas never picked up real dimensions (e.g. this
+    // frame ran before layout settled), retry the resize instead of
+    // drawing into a zero-size canvas every frame.
+    if (canvas.width === 0 || canvas.height === 0) {
+      if (window.innerWidth > 0 && window.innerHeight > 0) resizeCanvas();
+      animId = requestAnimationFrame(animateFlow);
+      return;
+    }
+
     globalTime++;
 
     // Semi-transparent overlay → trails fade naturally (streamline effect)
@@ -283,16 +292,20 @@
   // Bootstrap
   resizeCanvas();
   initFlow();
-  // Pre-fill: run a few hundred silent frames so trails are already visible on load
-  for (let i = 0; i < 250; i++) {
-    globalTime++;
-    ctx.fillStyle = 'rgba(10, 14, 26, 0.12)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.globalAlpha = 0.04;
-    ctx.drawImage(starCanvas, 0, 0);
-    ctx.globalAlpha = 1.0;
-    for (const v of vortices) v.update(globalTime);
-    for (const t of tracers) { t.update(); t.draw(); }
+  // Pre-fill: run a few hundred silent frames so trails are already visible on load.
+  // Skipped if the canvas has no area yet (e.g. tab not laid out) — drawImage
+  // throws on a zero-size source, which would otherwise abort the rest of this script.
+  if (canvas.width > 0 && canvas.height > 0) {
+    for (let i = 0; i < 250; i++) {
+      globalTime++;
+      ctx.fillStyle = 'rgba(10, 14, 26, 0.12)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.globalAlpha = 0.04;
+      ctx.drawImage(starCanvas, 0, 0);
+      ctx.globalAlpha = 1.0;
+      for (const v of vortices) v.update(globalTime);
+      for (const t of tracers) { t.update(); t.draw(); }
+    }
   }
   animateFlow();
 
@@ -513,14 +526,37 @@
           });
         }
         if (counterEl) counterEl.textContent = `${activeIndex + 1} / ${count}`;
-        if (prevBtn) prevBtn.disabled = activeIndex === 0;
-        if (nextBtn) nextBtn.disabled = activeIndex === count - 1;
       }
 
       function goTo(i) {
-        const target = slides[Math.max(0, Math.min(count - 1, i))];
+        const wrapped = ((i % count) + count) % count;
+        const target = slides[wrapped];
         target.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        startAutoplay();
       }
+
+      // Autoplay: advance to the next image every 10s, looping back to the
+      // start. Paused while the visitor is hovering or actively dragging.
+      const AUTOPLAY_INTERVAL = 10000;
+      let autoplayTimer = null;
+
+      function stopAutoplay() {
+        if (autoplayTimer) {
+          clearInterval(autoplayTimer);
+          autoplayTimer = null;
+        }
+      }
+
+      function startAutoplay() {
+        stopAutoplay();
+        if (count <= 1) return;
+        autoplayTimer = setInterval(() => goTo(activeIndex + 1), AUTOPLAY_INTERVAL);
+      }
+
+      root.addEventListener('mouseenter', stopAutoplay);
+      root.addEventListener('mouseleave', startAutoplay);
+      viewport.addEventListener('touchstart', stopAutoplay, { passive: true });
+      viewport.addEventListener('touchend', startAutoplay, { passive: true });
 
       let scrollRaf = null;
       viewport.addEventListener('scroll', () => {
@@ -572,6 +608,7 @@
       });
 
       updateActive();
+      startAutoplay();
     });
   }
 
