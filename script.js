@@ -622,6 +622,79 @@
 
 
   /* ---------------------------------
+     TEST FLIGHT VIDEOS
+     Reads window.VIDEO_MANIFEST (assets/videos/manifest.js).
+     Groups videos 3-per-row; a lone leftover video stays column-width
+     and centers, a pair of leftovers splits its row 50/50. All videos
+     in a section play/pause together based on scroll visibility.
+     --------------------------------- */
+  function initVideoRows() {
+    const manifest = window.VIDEO_MANIFEST || {};
+
+    document.querySelectorAll('.project-videos').forEach(root => {
+      const dir = root.dataset.videoDir;
+      const files = (manifest[dir] && manifest[dir].length) ? manifest[dir] : null;
+      const rowsEl = root.querySelector('.videos-rows');
+      const items = files || [null]; // no videos yet → show a single placeholder
+      const videos = [];
+
+      for (let i = 0; i < items.length; i += 3) {
+        const chunk = items.slice(i, i + 3);
+        const rowEl = document.createElement('div');
+        rowEl.className = 'videos-row';
+        if (chunk.length === 1) rowEl.classList.add('videos-row-solo');
+
+        chunk.forEach((file, idx) => {
+          const item = document.createElement('div');
+          item.className = 'video-item';
+
+          if (file) {
+            const video = document.createElement('video');
+            video.src = `${dir}/${file}`;
+            video.muted = true;
+            video.setAttribute('muted', '');
+            video.loop = true;
+            video.playsInline = true;
+            video.setAttribute('playsinline', '');
+            video.preload = 'metadata';
+            video.setAttribute('aria-label', `Test flight video ${i + idx + 1}`);
+            item.appendChild(video);
+            videos.push(video);
+          } else {
+            item.classList.add('video-item-placeholder');
+            const icon = document.createElement('div');
+            icon.className = 'placeholder-icon';
+            icon.textContent = '🎬';
+            const label = document.createElement('span');
+            label.textContent = 'Test flight footage coming soon';
+            item.append(icon, label);
+          }
+          rowEl.appendChild(item);
+        });
+
+        rowsEl.appendChild(rowEl);
+      }
+
+      if (!videos.length) return;
+
+      const videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            videos.forEach(v => { v.play().catch(() => {}); });
+          } else {
+            videos.forEach(v => v.pause());
+          }
+        });
+      }, { threshold: 0.25 });
+
+      videoObserver.observe(root);
+    });
+  }
+
+  initVideoRows();
+
+
+  /* ---------------------------------
      ACTIVE NAV LINK HIGHLIGHT
      --------------------------------- */
   const sections = document.querySelectorAll('section[id]');
