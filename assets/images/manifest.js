@@ -41,13 +41,13 @@ window.IMAGE_MANIFEST = {
                                         "4.png"
                                     ],
     "assets/images/ambulance/how":  [
-
+                                        "1.jpg"
                                     ],
     "assets/images/ambulance/result":  [
-
+                                           "1.jpg"
                                        ],
     "assets/images/ambulance/what":  [
-
+                                         "1.jpg"
                                      ],
     "assets/images/ccgt/how":  [
 
@@ -59,22 +59,22 @@ window.IMAGE_MANIFEST = {
 
                                 ],
     "assets/images/flood/how":  [
-
+                                    "1.png"
                                 ],
     "assets/images/flood/result":  [
-
+                                       "1.jpg"
                                    ],
     "assets/images/flood/what":  [
-
+                                     "1.png"
                                  ],
     "assets/images/glider/how":  [
-
+                                     "1.png"
                                  ],
     "assets/images/glider/result":  [
-
+                                        "1.jpg"
                                     ],
     "assets/images/glider/what":  [
-
+                                      "1.png"
                                   ],
     "assets/images/hvac/how":  [
 

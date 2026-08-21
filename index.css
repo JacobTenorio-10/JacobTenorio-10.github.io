@@ -1019,12 +1019,23 @@ img {
   align-items: center;
   gap: 0.65rem;
   flex: 0 1 340px;
+  min-width: 0;
   max-width: 100%;
+  position: relative;
 }
 
-.report-subsection + .report-subsection {
-  border-left: 1px solid rgba(255, 255, 255, 0.1);
-  padding-left: 1.5rem;
+/* A pseudo-element in the row's gap, not padding/border on the
+   subsection itself -- padding here would eat into this subsection's
+   own content width, making it narrower than the first subsection
+   even though both share the same flex-basis. */
+.report-subsection + .report-subsection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -0.75rem;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .report-subsection-title {
@@ -1042,14 +1053,17 @@ img {
   align-items: center;
   gap: 0.65rem;
   width: 100%;
+  min-width: 0;
 }
 
 .report-viewer object {
   width: 100%;
-  /* Matches the reports' actual page proportions (816 x 1056pt, both
-     2025 and 2026) so the "fit page" zoom shows exactly one page with
-     no sliver of the next page visible below it. */
-  aspect-ratio: 816 / 1056;
+  /* The reports' actual page is 816 x 1056pt (aspect ratio 0.7727), but
+     Chrome's embedded PDF viewer leaves a small safety margin around a
+     "fit page" render (so it never clips an edge), which showed as a
+     sliver of page 2 when this box exactly matched that ratio. Ratio is
+     intentionally ~4% shorter than exact to absorb that margin. */
+  aspect-ratio: 4 / 5;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 10px;
   background: #525659;
@@ -1311,10 +1325,16 @@ img {
   }
 
   .report-subsection + .report-subsection {
-    border-left: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-left: 0;
     padding-top: 1.5rem;
+  }
+
+  .report-subsection + .report-subsection::before {
+    top: -0.75rem;
+    left: 0;
+    right: 0;
+    bottom: auto;
+    width: auto;
+    height: 1px;
   }
 
   /* Skills */
