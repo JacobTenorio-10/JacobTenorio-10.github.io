@@ -31,6 +31,26 @@ should contain `what/`, `how/`, and `result/` subfolders.
 If a folder has no images yet, that slot shows a placeholder (icon + label) so the
 carousel is still visible and functional in the meantime.
 
+## Showcasing a PDF page as a static image
+
+The carousels only ever show plain images — no PDF viewer, so no zoom/scroll/
+toolbar. To feature a single page from a PDF (e.g. a report cover or a
+specific figure) as one of the photos, render that page to a JPG first with
+the included script:
+
+```
+powershell -ExecutionPolicy Bypass -File assets/images/pdf-page-to-image.ps1 -PdfPath "assets/reports/2026_DBF_Design_Report.pdf" -PageNumber 1 -OutputPath "assets/images/aircraft/what/1.jpg"
+```
+
+- `-PageNumber` is 1-indexed (page 1 = the first page).
+- `-Width` (default 900) controls the output image width in pixels.
+- `-OutputPath` can end in `.jpg` or `.png`.
+
+This uses Windows' own built-in PDF renderer (no Python/third-party PDF
+library involved), so it works regardless of what else is installed. Once
+the image exists, treat it like any other photo: it just needs to be in the
+right `what`/`how`/`result` folder before you run `generate-manifests.ps1`.
+
 ## Folder → project mapping
 
 | Project | Folders |
