@@ -782,6 +782,8 @@ img {
 
 .carousel-dots {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 5px;
 }
 
@@ -1224,16 +1226,6 @@ img {
 /* ===================================
    FOOTER
    =================================== */
-.site-footer {
-  text-align: center;
-  padding: 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  color: var(--text-muted);
-  font-size: 0.8rem;
-  position: relative;
-  z-index: 1;
-}
-
 
 /* ===================================
    RESPONSIVE DESIGN

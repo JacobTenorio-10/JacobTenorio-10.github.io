@@ -529,7 +529,7 @@
         slides.push(slide);
       }
 
-      const showDots = count > 1 && count <= 8;
+      const showDots = count > 1;
       if (showDots) {
         slides.forEach((_, i) => {
           const dot = document.createElement('button');
