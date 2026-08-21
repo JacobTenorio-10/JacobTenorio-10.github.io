@@ -3,7 +3,8 @@
     [Parameter(Mandatory=$true)][int]$PageNumber,
     [Parameter(Mandatory=$true)][string]$OutputPath,
     [int]$Width = 900,
-    [int]$JpegQuality = 85
+    [int]$JpegQuality = 85,
+    [ValidateSet(0, 90, 180, 270)][int]$Rotate = 0
 )
 
 $ErrorActionPreference = 'Stop'
@@ -51,6 +52,10 @@ $page.Dispose()
 
 $netStream = [System.IO.WindowsRuntimeStreamExtensions]::AsStreamForRead($stream.GetInputStreamAt(0))
 $bitmap = [System.Drawing.Bitmap]::FromStream($netStream)
+
+if ($Rotate -eq 90) { $bitmap.RotateFlip([System.Drawing.RotateFlipType]::Rotate90FlipNone) }
+elseif ($Rotate -eq 180) { $bitmap.RotateFlip([System.Drawing.RotateFlipType]::Rotate180FlipNone) }
+elseif ($Rotate -eq 270) { $bitmap.RotateFlip([System.Drawing.RotateFlipType]::Rotate270FlipNone) }
 
 $newHeight = [int]([double]$bitmap.Height * $Width / $bitmap.Width)
 $resized = New-Object System.Drawing.Bitmap($bitmap, $Width, $newHeight)

@@ -706,7 +706,7 @@ img {
 .carousel-slide img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
   pointer-events: none;
   user-select: none;
@@ -928,7 +928,7 @@ img {
 .video-frame video {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
 }
 
@@ -970,6 +970,17 @@ img {
   text-align: center;
 }
 
+.project-reports-title {
+  text-align: center;
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--project-accent, var(--accent-blue));
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
 .reports-caption {
   font-size: 0.85rem;
   color: var(--text-secondary);
@@ -984,23 +995,35 @@ img {
   flex-wrap: wrap;
 }
 
-.report-viewer {
+.report-subsection {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.65rem;
-  width: 400px;
+  flex: 0 1 340px;
   max-width: 100%;
 }
 
-.report-viewer-tag {
-  align-self: flex-start;
+.report-subsection + .report-subsection {
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  padding-left: 1.5rem;
+}
+
+.report-subsection-title {
   font-family: var(--font-heading);
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--project-accent, var(--accent-blue));
+}
+
+.report-viewer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+  width: 100%;
 }
 
 .report-viewer object {
@@ -1267,6 +1290,20 @@ img {
 
   .videos-row-solo .video-item {
     flex-basis: auto;
+  }
+
+  /* Design report subsections: stack instead of squeezing 3 across,
+     swap the vertical divider for a horizontal one between stacked items */
+  .report-subsection {
+    flex-basis: auto;
+    width: 100%;
+  }
+
+  .report-subsection + .report-subsection {
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-left: 0;
+    padding-top: 1.5rem;
   }
 
   /* Skills */

@@ -45,6 +45,10 @@ powershell -ExecutionPolicy Bypass -File assets/images/pdf-page-to-image.ps1 -Pd
 - `-PageNumber` is 1-indexed (page 1 = the first page).
 - `-Width` (default 900) controls the output image width in pixels.
 - `-OutputPath` can end in `.jpg` or `.png`.
+- `-Rotate` (0, 90, 180, or 270; default 0) rotates the rendered image clockwise.
+  Some exported drawing sheets (e.g. landscape CAD sheets exported onto a
+  portrait PDF page) render sideways with no rotation flag to detect
+  automatically — check the output and add `-Rotate 90` or `-Rotate 270` if so.
 
 This uses Windows' own built-in PDF renderer (no Python/third-party PDF
 library involved), so it works regardless of what else is installed. Once
