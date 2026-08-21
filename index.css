@@ -864,7 +864,7 @@ img {
 
 
 /* ===================================
-   PROJECT VIDEOS (Test Flights)
+   PROJECT VIDEOS (Testing)
    3-per-row; a lone leftover video stays
    column-width and centers, a pair of
    leftovers splits the row 50/50.
@@ -907,6 +907,16 @@ img {
 .video-item {
   flex: 1 1 0;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.videos-row-solo .video-item {
+  flex: 0 1 calc((100% - 2rem) / 3);
+}
+
+.video-frame {
   aspect-ratio: 16 / 9;
   border-radius: 10px;
   overflow: hidden;
@@ -915,15 +925,18 @@ img {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.videos-row-solo .video-item {
-  flex: 0 1 calc((100% - 2rem) / 3);
-}
-
-.video-item video {
+.video-frame video {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+.video-caption {
+  text-align: center;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--text-secondary);
 }
 
 .video-item-placeholder {

@@ -622,18 +622,21 @@
 
 
   /* ---------------------------------
-     TEST FLIGHT VIDEOS
-     Reads window.VIDEO_MANIFEST (assets/videos/manifest.js).
+     TESTING VIDEOS
+     Reads window.VIDEO_MANIFEST (assets/videos/manifest.js) and the
+     optional, hand-maintained window.VIDEO_CAPTIONS (assets/videos/captions.js).
      Groups videos 3-per-row; a lone leftover video stays column-width
      and centers, a pair of leftovers splits its row 50/50. All videos
      in a section play/pause together based on scroll visibility.
      --------------------------------- */
   function initVideoRows() {
     const manifest = window.VIDEO_MANIFEST || {};
+    const captions = window.VIDEO_CAPTIONS || {};
 
     document.querySelectorAll('.project-videos').forEach(root => {
       const dir = root.dataset.videoDir;
       const files = (manifest[dir] && manifest[dir].length) ? manifest[dir] : null;
+      const dirCaptions = captions[dir] || {};
       const rowsEl = root.querySelector('.videos-rows');
       const items = files || [null]; // no videos yet → show a single placeholder
       const videos = [];
@@ -647,8 +650,11 @@
         chunk.forEach((file, idx) => {
           const item = document.createElement('div');
           item.className = 'video-item';
+          const frame = document.createElement('div');
+          frame.className = 'video-frame';
 
           if (file) {
+            const caption = dirCaptions[file];
             const video = document.createElement('video');
             video.src = `${dir}/${file}`;
             video.muted = true;
@@ -657,17 +663,27 @@
             video.playsInline = true;
             video.setAttribute('playsinline', '');
             video.preload = 'metadata';
-            video.setAttribute('aria-label', `Test flight video ${i + idx + 1}`);
-            item.appendChild(video);
+            video.setAttribute('aria-label', caption || `Testing video ${i + idx + 1}`);
+            frame.appendChild(video);
             videos.push(video);
+
+            if (caption) {
+              const captionEl = document.createElement('p');
+              captionEl.className = 'video-caption';
+              captionEl.textContent = caption;
+              item.append(frame, captionEl);
+            } else {
+              item.appendChild(frame);
+            }
           } else {
-            item.classList.add('video-item-placeholder');
+            frame.classList.add('video-item-placeholder');
             const icon = document.createElement('div');
             icon.className = 'placeholder-icon';
             icon.textContent = '🎬';
             const label = document.createElement('span');
-            label.textContent = 'Test flight footage coming soon';
-            item.append(icon, label);
+            label.textContent = 'Testing footage coming soon';
+            frame.append(icon, label);
+            item.appendChild(frame);
           }
           rowEl.appendChild(item);
         });

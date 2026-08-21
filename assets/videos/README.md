@@ -1,6 +1,6 @@
-# Test Flight Videos
+# Testing Videos
 
-The "Test Flights" section on the Multi-Mission Competition Aircraft project
+The "Testing" section on the Multi-Mission Competition Aircraft project
 card plays as many videos as you add, 3 per row. Videos autoplay (muted) and
 loop as soon as the section scrolls into view, and pause when it scrolls out
 of view.
@@ -20,6 +20,13 @@ of view.
 4. Refresh the page. That's it — no HTML/JS edits needed, and there's no
    limit on how many videos you add.
 
+## Captions
+
+Optional captions shown under each video live in `assets/videos/captions.js`,
+keyed by folder path and then filename. This file is hand-maintained and
+never touched by `generate-manifests.ps1`, so edits persist across manifest
+regeneration. A video with no entry there just shows no caption.
+
 ## Row layout
 
 - Full rows of 3 videos are always equal width.
@@ -29,7 +36,9 @@ of view.
 
 ## A note on file size
 
-Video files are much larger than images. GitHub Pages doesn't set a hard
-per-file limit the way some hosts do, but large videos make the repo slower
-to clone/push and slower for visitors to load — consider compressing footage
-(e.g. H.264 mp4, reasonable bitrate/resolution) before adding it here.
+Video files are much larger than images. GitHub enforces a **hard 100MB
+per-file limit** — a push containing a larger file is rejected outright. Keep
+an eye on file size before adding footage (e.g. re-encode with `ffmpeg` at a
+lower bitrate, roughly 5 Mbps is plenty for 1080p30 and keeps a ~70s clip
+around 40-50MB). Even well under that limit, large videos make the repo
+slower to clone/push and slower for visitors to load.
