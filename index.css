@@ -308,15 +308,6 @@ img {
   max-width: 800px;
 }
 
-.hero-greeting {
-  font-size: 1.1rem;
-  font-weight: 400;
-  color: var(--accent-blue);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  margin-bottom: 0.75rem;
-}
-
 .hero-name {
   font-family: var(--font-heading);
   font-size: clamp(3rem, 10vw, 6rem);
@@ -336,14 +327,6 @@ img {
   0%, 100% { background-position: 0% 50%; }
   33% { background-position: 50% 100%; }
   66% { background-position: 100% 50%; }
-}
-
-.hero-divider {
-  width: 80px;
-  height: 3px;
-  margin: 0 auto 1.5rem;
-  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-orange));
-  border-radius: 3px;
 }
 
 .hero-subtitle {
@@ -470,25 +453,24 @@ img {
 }
 
 .edu-degree {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
   font-size: 0.95rem;
   color: var(--text-secondary);
+  margin: 0.35rem 0 0.5rem;
 }
 
-.edu-highlights {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin: 0.25rem 0;
-}
-
-.edu-badge {
+.edu-gpa {
   font-size: 0.78rem;
   font-weight: 600;
-  padding: 0.3rem 0.75rem;
+  padding: 0.25rem 0.7rem;
   border-radius: 20px;
   background: rgba(0, 180, 216, 0.1);
   border: 1px solid rgba(0, 180, 216, 0.25);
   color: var(--accent-blue);
+  white-space: nowrap;
 }
 
 .edu-coursework {
@@ -617,6 +599,7 @@ img {
 .project-tags {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 0.5rem;
 }
 
@@ -630,6 +613,15 @@ img {
   color: var(--accent-blue);
   text-transform: uppercase;
   letter-spacing: 0.05em;
+}
+
+/* Separates organization/competition tags (e.g. AIAA, Army Corps of
+   Engineers) from tool/skill tags (e.g. SolidWorks, CFD) within the
+   same row. Standard for any project with both kinds of tags. */
+.project-tag-divider {
+  width: 1px;
+  align-self: stretch;
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .project-images {
@@ -701,6 +693,10 @@ img {
   transform: scale(1);
   opacity: 1;
   border-color: transparent;
+}
+
+.carousel-slide-clickable {
+  cursor: pointer;
 }
 
 .carousel-slide img {
@@ -811,6 +807,26 @@ img {
   color: var(--text-muted);
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.03em;
+}
+
+.carousel-pause {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.25s ease, background 0.25s ease;
+}
+
+.carousel-pause:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .project-details {
@@ -1028,7 +1044,10 @@ img {
 
 .report-viewer object {
   width: 100%;
-  height: 560px;
+  /* Matches the reports' actual page proportions (816 x 1056pt, both
+     2025 and 2026) so the "fit page" zoom shows exactly one page with
+     no sliver of the next page visible below it. */
+  aspect-ratio: 816 / 1056;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 10px;
   background: #525659;
@@ -1346,11 +1365,7 @@ img {
     padding: 1rem;
   }
 
-  .edu-highlights {
-    gap: 0.4rem;
-  }
-
-  .edu-badge {
+  .edu-gpa {
     font-size: 0.72rem;
     padding: 0.25rem 0.6rem;
   }
@@ -1358,8 +1373,60 @@ img {
   .reports-row {
     gap: 1.75rem;
   }
+}
 
-  .report-viewer object {
-    height: 440px;
-  }
+
+/* ===================================
+   IMAGE LIGHTBOX
+   =================================== */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 4vh 4vw;
+  background: rgba(5, 8, 16, 0.92);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.lightbox.is-open {
+  display: flex;
+}
+
+.lightbox-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-close {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(10, 14, 26, 0.6);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+.lightbox-close:hover {
+  background: rgba(0, 180, 216, 0.25);
+  border-color: rgba(0, 180, 216, 0.5);
+  color: var(--accent-cyan);
+}
+
+body.lightbox-open {
+  overflow: hidden;
 }

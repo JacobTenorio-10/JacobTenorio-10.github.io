@@ -442,6 +442,38 @@
 
 
   /* ---------------------------------
+     IMAGE LIGHTBOX
+     Click any carousel image (including PDF-page images) to enlarge it.
+     --------------------------------- */
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = lightbox.querySelector('.lightbox-img');
+  const lightboxClose = lightbox.querySelector('.lightbox-close');
+
+  function openLightbox(src, alt) {
+    lightboxImg.src = src;
+    lightboxImg.alt = alt || '';
+    lightbox.classList.add('is-open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('lightbox-open');
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('is-open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('lightbox-open');
+    lightboxImg.src = '';
+  }
+
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox.classList.contains('is-open')) closeLightbox();
+  });
+
+
+  /* ---------------------------------
      IMAGE CAROUSELS (Instagram-style peek/scroll)
      Reads window.IMAGE_MANIFEST (assets/images/manifest.js).
      Falls back to placeholder slides when a folder has no images yet.
@@ -461,6 +493,7 @@
       const track = root.querySelector('.carousel-track');
       const dotsEl = root.querySelector('.carousel-dots');
       const counterEl = root.querySelector('.carousel-counter');
+      const pauseBtn = root.querySelector('.carousel-pause');
       const prevBtn = root.querySelector('.carousel-arrow-prev');
       const nextBtn = root.querySelector('.carousel-arrow-next');
 
@@ -475,6 +508,10 @@
           img.alt = `${label} ${i + 1}`;
           img.loading = 'lazy';
           img.draggable = false;
+          // img has pointer-events:none (so drag-to-scroll works), so the
+          // click to open the lightbox is bound to the slide instead.
+          slide.addEventListener('click', () => openLightbox(img.src, img.alt));
+          slide.classList.add('carousel-slide-clickable');
           slide.appendChild(img);
         } else {
           slide.classList.add('carousel-slide-placeholder');
@@ -542,9 +579,11 @@
       }
 
       // Autoplay: advance to the next image every 10s, looping back to the
-      // start. Paused while the visitor is hovering or actively dragging.
+      // start. Keeps running while hovered; only a manual pause (via the
+      // pause button) or an active drag stops it.
       const AUTOPLAY_INTERVAL = 10000;
       let autoplayTimer = null;
+      let isPaused = false;
 
       function stopAutoplay() {
         if (autoplayTimer) {
@@ -555,14 +594,25 @@
 
       function startAutoplay() {
         stopAutoplay();
-        if (count <= 1) return;
-        autoplayTimer = setInterval(() => goTo(activeIndex + 1), AUTOPLAY_INTERVAL);
+        if (isPaused || count <= 1) return;
+        autoplayTimer = setInterval(() => {
+          if (isDown) return; // don't fight an active drag
+          goTo(activeIndex + 1);
+        }, AUTOPLAY_INTERVAL);
       }
 
-      root.addEventListener('mouseenter', stopAutoplay);
-      root.addEventListener('mouseleave', startAutoplay);
-      viewport.addEventListener('touchstart', stopAutoplay, { passive: true });
-      viewport.addEventListener('touchend', startAutoplay, { passive: true });
+      function setPaused(paused) {
+        isPaused = paused;
+        if (pauseBtn) {
+          pauseBtn.setAttribute('aria-label', isPaused ? 'Play slideshow' : 'Pause slideshow');
+          pauseBtn.innerHTML = isPaused
+            ? '<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>'
+            : '<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
+        }
+        if (isPaused) stopAutoplay(); else startAutoplay();
+      }
+
+      if (pauseBtn) pauseBtn.addEventListener('click', () => setPaused(!isPaused));
 
       let scrollRaf = null;
       viewport.addEventListener('scroll', () => {
