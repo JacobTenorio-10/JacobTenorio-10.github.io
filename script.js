@@ -292,11 +292,22 @@
   // Bootstrap
   resizeCanvas();
   initFlow();
-  // Pre-fill: run a few hundred silent frames so trails are already visible on load.
-  // Skipped if the canvas has no area yet (e.g. tab not laid out) — drawImage
-  // throws on a zero-size source, which would otherwise abort the rest of this script.
-  if (canvas.width > 0 && canvas.height > 0) {
-    for (let i = 0; i < 250; i++) {
+  // Pre-fill: run a few hundred silent frames so trails are already visible
+  // on load, spread across animation frames in small chunks instead of one
+  // long synchronous loop, so this doesn't block the page from painting or
+  // responding to input while it runs. Skipped entirely if the canvas has
+  // no area yet (e.g. tab not laid out) — drawImage throws on a zero-size
+  // source.
+  const PREFILL_FRAMES = 250;
+  const PREFILL_CHUNK = 15;
+
+  function runPrefill(remaining) {
+    if (remaining <= 0) {
+      animateFlow();
+      return;
+    }
+    const chunk = Math.min(PREFILL_CHUNK, remaining);
+    for (let i = 0; i < chunk; i++) {
       globalTime++;
       ctx.fillStyle = 'rgba(10, 14, 26, 0.12)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -306,8 +317,14 @@
       for (const v of vortices) v.update(globalTime);
       for (const t of tracers) { t.update(); t.draw(); }
     }
+    requestAnimationFrame(() => runPrefill(remaining - chunk));
   }
-  animateFlow();
+
+  if (canvas.width > 0 && canvas.height > 0) {
+    runPrefill(PREFILL_FRAMES);
+  } else {
+    animateFlow();
+  }
 
   // Handle resize
   let resizeTimer;
@@ -503,16 +520,34 @@
         slide.className = 'carousel-slide';
 
         if (files) {
+          const file = files[i];
+          const src = `${dir}/${file}`;
           const img = document.createElement('img');
-          img.src = `${dir}/${files[i]}`;
+          img.src = src;
           img.alt = `${label} ${i + 1}`;
           img.loading = 'lazy';
           img.draggable = false;
+
+          // Serve the smaller WebP sibling when one exists (every JPEG
+          // produced by optimize-images.py has one), falling back to the
+          // JPEG automatically via <picture> for browsers that lack WebP
+          // support.
+          let mediaEl = img;
+          if (/\.jpe?g$/i.test(file)) {
+            const picture = document.createElement('picture');
+            const source = document.createElement('source');
+            source.srcset = src.replace(/\.jpe?g$/i, '.webp');
+            source.type = 'image/webp';
+            picture.append(source, img);
+            mediaEl = picture;
+          }
+
           // img has pointer-events:none (so drag-to-scroll works), so the
           // click to open the lightbox is bound to the slide instead.
-          slide.addEventListener('click', () => openLightbox(img.src, img.alt));
+          // currentSrc reflects whichever format the browser actually chose.
+          slide.addEventListener('click', () => openLightbox(img.currentSrc || img.src, img.alt));
           slide.classList.add('carousel-slide-clickable');
-          slide.appendChild(img);
+          slide.appendChild(mediaEl);
         } else {
           slide.classList.add('carousel-slide-placeholder');
           const iconEl = document.createElement('div');

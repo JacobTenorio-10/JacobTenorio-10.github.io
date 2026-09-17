@@ -1,0 +1,10 @@
+{
+  "name": "portfolio-website",
+  "private": true,
+  "description": "Build step for the minified CSS/JS the site actually serves. Edit index.css and script.js, then run 'npm run build' before deploying.",
+  "scripts": {
+    "build": "npm run build:css && npm run build:js",
+    "build:css": "npx clean-css-cli -o index.min.css index.css",
+    "build:js": "npx terser script.js -c -m -o script.min.js"
+  }
+}
