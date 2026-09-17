@@ -7,26 +7,26 @@ window.IMAGE_MANIFEST = {
                                                 "4.jpg"
                                             ],
     "assets/images/aircraft/how":  [
-                                       "1.png",
-                                       "2.png",
+                                       "1.jpg",
+                                       "2.jpg",
                                        "4.jpg",
                                        "5.jpg",
-                                       "6.png",
+                                       "6.jpg",
                                        "7.jpg",
                                        "8.jpg",
                                        "9.jpg",
-                                       "10.png",
-                                       "11.png",
-                                       "12.png",
-                                       "13.png",
-                                       "14.png",
+                                       "10.jpg",
+                                       "11.jpg",
+                                       "12.jpg",
+                                       "13.jpg",
+                                       "14.jpg",
                                        "15.jpg",
-                                       "16.png",
-                                       "17.png"
+                                       "16.jpg",
+                                       "17.jpg"
                                    ],
     "assets/images/aircraft/result":  [
                                           "1.jpg",
-                                          "2.png",
+                                          "2.jpg",
                                           "3.jpg",
                                           "4.jpg",
                                           "5.jpg",
@@ -35,10 +35,10 @@ window.IMAGE_MANIFEST = {
                                           "8.jpg"
                                       ],
     "assets/images/aircraft/what":  [
-                                        "1.png",
-                                        "2.png",
-                                        "3.png",
-                                        "4.png"
+                                        "1.jpg",
+                                        "2.jpg",
+                                        "3.jpg",
+                                        "4.jpg"
                                     ],
     "assets/images/ambulance/how":  [
                                         "1.jpg"
@@ -50,31 +50,43 @@ window.IMAGE_MANIFEST = {
                                          "1.jpg"
                                      ],
     "assets/images/ccgt/how":  [
-
+                                   "1.jpg",
+                                   "2.jpg",
+                                   "3.jpg",
+                                   "4.jpg"
                                ],
     "assets/images/ccgt/result":  [
-
+                                      "1.jpg",
+                                      "2.jpg",
+                                      "3.jpg",
+                                      "4.jpg",
+                                      "5.jpg",
+                                      "6.jpg",
+                                      "7.jpg",
+                                      "8.jpg"
                                   ],
     "assets/images/ccgt/what":  [
-
+                                    "1.jpg",
+                                    "2.jpg",
+                                    "3.jpg"
                                 ],
     "assets/images/flood/how":  [
-                                    "1.png"
+                                    "1.jpg"
                                 ],
     "assets/images/flood/result":  [
                                        "1.jpg"
                                    ],
     "assets/images/flood/what":  [
-                                     "1.png"
+                                     "1.jpg"
                                  ],
     "assets/images/glider/how":  [
-                                     "1.png"
+                                     "1.jpg"
                                  ],
     "assets/images/glider/result":  [
                                         "1.jpg"
                                     ],
     "assets/images/glider/what":  [
-                                      "1.png"
+                                      "1.jpg"
                                   ],
     "assets/images/hvac/how":  [
 

@@ -31,6 +31,23 @@ should contain `what/`, `how/`, and `result/` subfolders.
 If a folder has no images yet, that slot shows a placeholder (icon + label) so the
 carousel is still visible and functional in the meantime.
 
+## Keep photos web-sized
+
+Camera photos and screenshots are often 3000-4000px wide and several MB
+each — way more than a ~350-450px carousel box (or even the full-screen
+lightbox) ever needs. After adding new photos, run:
+
+```
+python assets/images/optimize-images.py
+```
+
+This caps every image in every `what`/`how`/`result` folder at 1920px on
+its longest side and re-encodes it as JPEG at quality 82 (converting any
+PNGs), typically cutting file sizes by 70-90% with no visible quality loss
+at display size. Safe to re-run any time — already-optimized images just
+get resized/recompressed again (a no-op if already small enough). Run
+`generate-manifests.ps1` afterward if any filenames changed (PNG → JPG).
+
 ## Showcasing a PDF page as a static image
 
 The carousels only ever show plain images — no PDF viewer, so no zoom/scroll/

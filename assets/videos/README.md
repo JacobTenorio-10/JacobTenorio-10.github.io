@@ -37,8 +37,22 @@ regeneration. A video with no entry there just shows no caption.
 ## A note on file size
 
 Video files are much larger than images. GitHub enforces a **hard 100MB
-per-file limit** — a push containing a larger file is rejected outright. Keep
-an eye on file size before adding footage (e.g. re-encode with `ffmpeg` at a
-lower bitrate, roughly 5 Mbps is plenty for 1080p30 and keeps a ~70s clip
-around 40-50MB). Even well under that limit, large videos make the repo
-slower to clone/push and slower for visitors to load.
+per-file limit** — a push containing a larger file is rejected outright.
+Even well under that limit, large videos make the repo slower to clone/push
+and slower for visitors to load, so check the bitrate before adding footage:
+phone/camera exports are often 10-20+ Mbps at 1080p, which is far more than
+a web video needs. Re-encode with `ffmpeg` (two-pass, ~5 Mbps is plenty for
+1080p30 and keeps file size roughly proportional to `5Mbps x duration`):
+
+```
+ffmpeg -y -i input.mp4 -c:v libx264 -b:v 5000k -pass 1 -an -f mp4 NUL
+ffmpeg -y -i input.mp4 -c:v libx264 -b:v 5000k -pass 2 -c:a aac -b:a 128k output.mp4
+```
+
+(On macOS/Linux replace `NUL` with `/dev/null`.) This typically cuts file
+size by 50-90% with no visible quality loss at normal viewing size.
+
+Note: `script.js` already lazy-loads these videos (they only start
+downloading once the Testing section scrolls into view), so an oversized
+video won't slow down the *rest* of the page — but it'll still be slow to
+actually start playing once a visitor scrolls to it.
