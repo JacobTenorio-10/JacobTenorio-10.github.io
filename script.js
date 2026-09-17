@@ -706,13 +706,16 @@
           if (file) {
             const caption = dirCaptions[file];
             const video = document.createElement('video');
-            video.src = `${dir}/${file}`;
+            // Deferred until this section actually scrolls into view (see the
+            // IntersectionObserver below) instead of fetching every video's
+            // data on page load regardless of whether the visitor gets here.
+            video.dataset.src = `${dir}/${file}`;
             video.muted = true;
             video.setAttribute('muted', '');
             video.loop = true;
             video.playsInline = true;
             video.setAttribute('playsinline', '');
-            video.preload = 'metadata';
+            video.preload = 'none';
             video.setAttribute('aria-label', caption || `Testing video ${i + idx + 1}`);
             frame.appendChild(video);
             videos.push(video);
@@ -746,7 +749,10 @@
       const videoObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            videos.forEach(v => { v.play().catch(() => {}); });
+            videos.forEach(v => {
+              if (!v.src && v.dataset.src) v.src = v.dataset.src;
+              v.play().catch(() => {});
+            });
           } else {
             videos.forEach(v => v.pause());
           }
@@ -758,6 +764,31 @@
   }
 
   initVideoRows();
+
+
+  /* ---------------------------------
+     LAZY-LOAD PDF REPORTS
+     The design report PDFs are tens of MB each. Only start fetching one
+     once the visitor scrolls near it, instead of on every page load
+     regardless of whether they ever reach the Design Reports section.
+     --------------------------------- */
+  function initLazyReports() {
+    const reportObjects = document.querySelectorAll('.report-viewer object[data-src]');
+    if (!reportObjects.length) return;
+
+    const reportObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const obj = entry.target;
+        obj.setAttribute('data', obj.dataset.src);
+        reportObserver.unobserve(obj);
+      });
+    }, { rootMargin: '600px 0px 600px 0px' });
+
+    reportObjects.forEach(obj => reportObserver.observe(obj));
+  }
+
+  initLazyReports();
 
 
   /* ---------------------------------

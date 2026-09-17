@@ -1058,12 +1058,9 @@ img {
 
 .report-viewer object {
   width: 100%;
-  /* The reports' actual page is 816 x 1056pt (aspect ratio 0.7727), but
-     Chrome's embedded PDF viewer leaves a small safety margin around a
-     "fit page" render (so it never clips an edge), which showed as a
-     sliver of page 2 when this box exactly matched that ratio. Ratio is
-     intentionally ~4% shorter than exact to absorb that margin. */
-  aspect-ratio: 4 / 5;
+  /* Matches the reports' actual page proportions (816 x 1056pt, both
+     2025 and 2026) so a correctly-fit page fills this box exactly. */
+  aspect-ratio: 816 / 1056;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 10px;
   background: #525659;
