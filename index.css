@@ -415,8 +415,6 @@ img {
 
 .about-bio p:last-child {
   margin-bottom: 0;
-  color: var(--accent-blue);
-  font-weight: 500;
 }
 
 .about-education {

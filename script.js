@@ -614,11 +614,16 @@
       }
 
       // Autoplay: advance to the next image every 10s, looping back to the
-      // start. Keeps running while hovered; only a manual pause (via the
-      // pause button) or an active drag stops it.
+      // start. Only runs while the carousel is actually on screen (see the
+      // IntersectionObserver below) — otherwise a carousel further down the
+      // page keeps advancing unseen before the visitor ever scrolls to it,
+      // so by the time they arrive the first few images have already been
+      // skipped. A manual pause (via the pause button) or an active drag
+      // also stops it.
       const AUTOPLAY_INTERVAL = 10000;
       let autoplayTimer = null;
       let isPaused = false;
+      let isVisible = false;
 
       function stopAutoplay() {
         if (autoplayTimer) {
@@ -629,7 +634,7 @@
 
       function startAutoplay() {
         stopAutoplay();
-        if (isPaused || count <= 1) return;
+        if (isPaused || !isVisible || count <= 1) return;
         autoplayTimer = setInterval(() => {
           if (isDown) return; // don't fight an active drag
           goTo(activeIndex + 1);
@@ -698,8 +703,21 @@
         if (e.key === 'ArrowRight') { e.preventDefault(); goTo(activeIndex + 1); }
       });
 
+      // Gate autoplay on actual visibility instead of starting the moment
+      // the page loads, regardless of scroll position.
+      const carouselVisibilityObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          isVisible = entry.isIntersecting;
+          if (isVisible) {
+            startAutoplay();
+          } else {
+            stopAutoplay();
+          }
+        });
+      }, { threshold: 0.3 });
+
       updateActive();
-      startAutoplay();
+      carouselVisibilityObserver.observe(root);
     });
   }
 
