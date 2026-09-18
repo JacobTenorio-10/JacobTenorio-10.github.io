@@ -20,6 +20,17 @@ Get-ChildItem -Path $root -Directory | Sort-Object Name | ForEach-Object {
         $files = @(
             Get-ChildItem -Path $categoryDir.FullName -File |
                 Where-Object { $imageExts -contains $_.Extension.ToLower() } |
+                Where-Object {
+                    # Skip a .webp file when a same-named .jpg/.jpeg sibling exists --
+                    # optimize-images.py always generates .webp as a companion to a
+                    # .jpg, and the page already serves it via <picture>, so listing
+                    # both would duplicate every such photo in the carousel. A
+                    # standalone .webp with no jpg/jpeg sibling still gets listed.
+                    if ($_.Extension.ToLower() -ne '.webp') { return $true }
+                    $hasJpgSibling = (Test-Path (Join-Path $categoryDir.FullName "$($_.BaseName).jpg")) -or
+                                     (Test-Path (Join-Path $categoryDir.FullName "$($_.BaseName).jpeg"))
+                    -not $hasJpgSibling
+                } |
                 Sort-Object { [regex]::Replace($_.BaseName, '\d+', { param($m) $m.Value.PadLeft(10, '0') }) } |
                 Select-Object -ExpandProperty Name
         )
