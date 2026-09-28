@@ -25,6 +25,7 @@ const ROOT = __dirname;
 const HTML_PATH = path.join(ROOT, 'index.html');
 const TEMPLATE_CSS_PATH = path.join(ROOT, 'portfolio-pdf.css');
 const OUTPUT_PATH = path.join(ROOT, 'assets', 'Jacob_Tenorio_Portfolio.pdf');
+const SITE_URL = 'https://jacobtenorio-10.github.io/';
 // Puppeteer's page.setContent() serves the page from an unprivileged
 // about:blank-like origin that Chromium refuses to load local file://
 // images from ("Not allowed to load local resource"). Writing the
@@ -141,6 +142,7 @@ function renderCoverPage(data) {
           <h1 class="cover-name">${escapeHtml(hero.name)}</h1>
           <p class="cover-subtitle">${escapeHtml(hero.subtitle)}</p>
           <p class="cover-school">${escapeHtml(hero.school)}</p>
+          <a class="cover-site-link" href="${SITE_URL}">View the full interactive portfolio &rarr; jacobtenorio-10.github.io</a>
         </div>
         <div class="cover-contact">
           ${contact.email ? `<a href="${contact.email.href}"><span class="cover-contact-label">Email</span><span class="cover-contact-value">${escapeHtml(contact.email.value)}</span></a>` : ''}
