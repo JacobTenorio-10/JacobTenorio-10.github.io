@@ -1448,3 +1448,129 @@ img {
 body.lightbox-open {
   overflow: hidden;
 }
+
+
+/* ===================================
+   PRINT / PORTFOLIO PDF
+   Used both by an actual browser print
+   and by build-portfolio-pdf.js (headless
+   Edge) to generate assets/Jacob_Tenorio_Portfolio.pdf.
+   Strips interactive/decorative chrome,
+   shows only the first image of each
+   carousel, and drops video/report embeds
+   that don't make sense in a static PDF.
+   =================================== */
+@media print {
+  @page {
+    size: letter;
+    margin: 0.5in;
+  }
+
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Decorative/interactive chrome that has no place in a static document */
+  #particle-canvas,
+  .navbar,
+  .streamline-divider,
+  .scroll-cta,
+  .lightbox {
+    display: none !important;
+  }
+
+  /* scroll-reveal normally waits for an IntersectionObserver to add
+     .revealed; force everything visible since nothing ever "scrolls"
+     in a PDF render. */
+  .scroll-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Image carousels: show only the first slide as a plain static image,
+     no controls -- a PDF page can't scroll through the rest. */
+  .carousel-arrow,
+  .carousel-pause,
+  .carousel-dots,
+  .carousel-counter,
+  .placeholder-index {
+    display: none !important;
+  }
+
+  .carousel-viewport {
+    overflow: visible !important;
+  }
+
+  .carousel-slide {
+    display: none !important;
+  }
+
+  .carousel-slide:first-child {
+    display: flex !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Videos aren't used in the PDF at all. */
+  .project-videos {
+    display: none !important;
+  }
+
+  /* The embedded report PDFs don't render meaningfully in a static
+     snapshot and it would be redundant to re-embed 50+MB of PDF inside
+     another PDF -- drop those subsections, but keep any sibling
+     subsection (e.g. CAD drawings) that's an ordinary image carousel. */
+  .report-subsection:has(.report-viewer) {
+    display: none !important;
+  }
+
+  /* Resume peek: keep the preview image itself, drop the interactive
+     hover fade/CTA overlay. */
+  .resume-peek-fade,
+  .resume-peek-cta {
+    display: none !important;
+  }
+
+  /* Text-heavy grids read better stacked on a portrait page (unequal
+     column heights otherwise leave awkward gaps, and 3-column body text
+     gets uncomfortably narrow). The print layout renders at roughly
+     phone width, which would otherwise trigger the site's own mobile
+     breakpoint here too -- these overrides are intentional either way. */
+  .about-grid,
+  .project-details {
+    display: block !important;
+  }
+
+  .about-grid > * + *,
+  .project-details > * + * {
+    margin-top: 1.25rem;
+  }
+
+  /* Photo/chip grids stay compact instead of falling back to the site's
+     mobile (1-column) breakpoint, which would otherwise trigger here too
+     since the print layout renders at roughly phone width. */
+  .project-images {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 0.5rem !important;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 1rem !important;
+  }
+
+  /* Keep related content from splitting awkwardly across pages. */
+  .project-header,
+  .project-column,
+  .about-bio,
+  .about-education,
+  .skill-category {
+    page-break-inside: avoid;
+  }
+
+  /* Don't split a project's header from the content right after it. */
+  .project-header {
+    page-break-after: avoid;
+  }
+}
