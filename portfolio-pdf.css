@@ -1,0 +1,374 @@
+/* Stylesheet for the standalone Portfolio PDF (see build-portfolio-pdf.js).
+   This is a separate, print-first design -- NOT the site's index.css.
+   It intentionally ignores the site's dark/glassmorphism look in favor of
+   a light, ink-efficient, page-paginated document. */
+
+:root {
+  --pdf-navy: #0a0e1a;
+  --pdf-blue: #0077b6;
+  --pdf-cyan: #00b4d8;
+  --pdf-cyan-bright: #00f0ff;
+  --pdf-text: #1b2430;
+  --pdf-text-muted: #5a6577;
+  --pdf-border: #e2e6eb;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+}
+
+body {
+  font-family: 'Barlow', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--pdf-text);
+  font-size: 10.3pt;
+  line-height: 1.45;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Space Grotesk', 'Barlow', sans-serif;
+}
+
+a { color: inherit; }
+
+/* ---------- page shell ---------- */
+
+.pdf-page {
+  padding: 0.55in 0.65in;
+  page-break-after: always;
+}
+
+.pdf-page:last-child { page-break-after: auto; }
+
+.page-footer {
+  margin-top: 0.35in;
+  padding-top: 0.12in;
+  border-top: 1px solid var(--pdf-border);
+  display: flex;
+  justify-content: space-between;
+  font-size: 7.3pt;
+  color: var(--pdf-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ---------- cover page ---------- */
+
+.cover-page {
+  width: 8.5in;
+  height: 11in;
+  margin: 0;
+  padding: 0;
+  page-break-after: always;
+  background:
+    radial-gradient(circle at 28% 18%, rgba(0, 180, 216, 0.28), transparent 55%),
+    radial-gradient(circle at 80% 85%, rgba(255, 107, 53, 0.14), transparent 50%),
+    linear-gradient(160deg, #0a0e1a 0%, #0f1b2d 60%, #0a0e1a 100%);
+  color: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+.cover-inner {
+  height: 100%;
+  padding: 1in 0.9in;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cover-kicker {
+  font-size: 11pt;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--pdf-cyan-bright);
+}
+
+.cover-name {
+  font-weight: 700;
+  font-size: 50pt;
+  line-height: 1.08;
+  margin: 0.35in 0 0.15in;
+}
+
+.cover-subtitle {
+  font-size: 15pt;
+  font-weight: 500;
+  color: #cbd4de;
+  margin: 0 0 0.06in;
+}
+
+.cover-school {
+  font-size: 12.5pt;
+  color: #8b97a8;
+  margin: 0;
+}
+
+.cover-contact {
+  display: flex;
+  gap: 0.55in;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: 0.28in;
+}
+
+.cover-contact a { text-decoration: none; }
+
+.cover-contact-label {
+  display: block;
+  font-size: 7.5pt;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--pdf-cyan);
+  margin-bottom: 3px;
+}
+
+.cover-contact-value {
+  font-size: 10.5pt;
+  color: #dbe2ea;
+}
+
+/* ---------- section heading (About, Skills pages) ---------- */
+
+.section-heading {
+  font-size: 19pt;
+  font-weight: 700;
+  color: var(--pdf-navy);
+  margin: 0 0 0.28in;
+  padding-bottom: 0.09in;
+  border-bottom: 2px solid var(--pdf-cyan);
+  display: inline-block;
+}
+
+/* ---------- about / education ---------- */
+
+.about-bio p {
+  margin: 0 0 0.15in;
+  font-size: 10.4pt;
+}
+
+.edu-block {
+  margin-top: 0.3in;
+  padding-top: 0.28in;
+  border-top: 1px solid var(--pdf-border);
+}
+
+.edu-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.04in;
+}
+
+.edu-school {
+  font-weight: 700;
+  font-size: 12.5pt;
+  color: var(--pdf-navy);
+}
+
+.edu-date {
+  font-size: 9.5pt;
+  color: var(--pdf-text-muted);
+}
+
+.edu-degree {
+  margin: 0.06in 0;
+  font-size: 10.5pt;
+}
+
+.edu-degree .edu-gpa {
+  color: var(--pdf-blue);
+  font-weight: 600;
+  margin-left: 0.15in;
+}
+
+.edu-coursework {
+  font-size: 9.4pt;
+  color: var(--pdf-text-muted);
+}
+
+.edu-coursework strong { color: var(--pdf-text); }
+
+/* ---------- projects ---------- */
+
+.project-page {
+  --project-accent: #00b4d8;
+}
+
+.project-page-header { page-break-inside: avoid; }
+
+.project-kicker {
+  font-size: 8.5pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--project-accent);
+  margin-bottom: 0.05in;
+}
+
+.project-title {
+  font-size: 18.5pt;
+  font-weight: 700;
+  color: var(--pdf-navy);
+  margin: 0 0 0.09in;
+}
+
+.project-title-rule {
+  height: 3px;
+  width: 1.7in;
+  background: var(--project-accent);
+  border-radius: 2px;
+  margin-bottom: 0.13in;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.08in;
+}
+
+.project-tag {
+  font-size: 8.2pt;
+  font-weight: 600;
+  padding: 2px 9px;
+  border-radius: 10px;
+  background: #f2f4f6;
+  border: 1px solid var(--pdf-border);
+  color: var(--pdf-text-muted);
+}
+
+.project-credit {
+  font-size: 8.6pt;
+  font-style: italic;
+  color: var(--pdf-text-muted);
+  margin-top: 0.09in;
+}
+
+.project-images-row {
+  display: flex;
+  gap: 0.2in;
+  margin: 0.22in 0;
+  page-break-inside: avoid;
+}
+
+.project-image { flex: 1; }
+
+.project-image-frame {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 6px;
+  border: 1px solid var(--pdf-border);
+  background: #f6f7f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.project-image-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.project-image-caption {
+  margin-top: 0.06in;
+  font-size: 7.8pt;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--pdf-text-muted);
+}
+
+.project-columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.28in;
+  margin-top: 0.12in;
+}
+
+.project-column h4 {
+  font-size: 9.8pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--project-accent);
+  margin: 0 0 0.08in;
+}
+
+.project-column ul {
+  margin: 0;
+  padding-left: 0.16in;
+}
+
+.project-column li {
+  font-size: 9.2pt;
+  margin-bottom: 0.07in;
+  line-height: 1.38;
+}
+
+.project-column li strong { color: var(--pdf-navy); }
+
+/* ---------- skills + contact (final page) ---------- */
+
+.skills-columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.32in;
+  margin-top: 0.15in;
+}
+
+.skill-cat-title {
+  font-size: 11.5pt;
+  font-weight: 700;
+  color: var(--pdf-navy);
+  margin: 0 0 0.11in;
+}
+
+.skill-chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.07in;
+}
+
+.skill-chip {
+  font-size: 8.2pt;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 10px;
+  background: #eef6fa;
+  border: 1px solid #d7e9f0;
+  color: var(--pdf-blue);
+}
+
+.contact-block {
+  margin-top: 0.45in;
+  padding-top: 0.32in;
+  border-top: 1px solid var(--pdf-border);
+  display: flex;
+  gap: 0.6in;
+}
+
+.contact-item-label {
+  display: block;
+  font-size: 7.8pt;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--pdf-text-muted);
+  margin-bottom: 3px;
+}
+
+.contact-item-value {
+  font-size: 10.5pt;
+  font-weight: 600;
+  color: var(--pdf-navy);
+  text-decoration: none;
+}

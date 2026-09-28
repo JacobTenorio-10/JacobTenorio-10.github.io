@@ -24,17 +24,26 @@ source file and its `.min` counterpart together.
 
 `npm run build` (via `npm run build:pdf`) also regenerates
 `assets/Jacob_Tenorio_Portfolio.pdf` — a downloadable PDF version of the
-site, linked from the nav bar as "Portfolio (PDF)". It's a render of
-`index.html` under the `@media print` rules at the bottom of `index.css`,
-which strip out anything that doesn't make sense in a static document:
-navigation, the particle canvas, video sections, the embedded report PDF
-viewers, and every carousel image after the first (each carousel shows
-only its first photo).
+portfolio, linked from the nav bar as "Portfolio (PDF)". It's meant to be
+printed or attached to applications as a standalone document, so it is
+**not** a printout of the website: `build-portfolio-pdf.js` scrapes the
+bio, education, project text/images, skills, and contact info out of the
+live `index.html`, then renders that content into `portfolio-pdf.css` — a
+separate layout designed for paginated print, with a cover page and one
+page per project. It deliberately leaves out things that only make sense
+interactively: the resume preview (there's no full-resume download to
+back it up), video clips, and the embedded/scrollable AIAA DBF design
+report viewers. Each carousel still contributes its first photo.
+
+If you add or reorder projects, edit the bio, or change contact info in
+`index.html`, the PDF picks it up automatically next time it's built — no
+need to touch `build-portfolio-pdf.js`. Only the PDF's own look (page
+layout, cover page, typography) lives in `portfolio-pdf.css`.
 
 **There's no CI here — this is a local build step.** Run `npm run build`
-(or just `npm run build:pdf`) yourself any time you change `index.html`,
-`index.css`, project photos, or the resume, then commit the regenerated
-PDF alongside your other changes. It won't update itself.
+(or just `npm run build:pdf`) yourself any time you change `index.html`
+content or project photos, then commit the regenerated PDF alongside your
+other changes. It won't update itself.
 
 Two extra things this step needs beyond Node:
 - **A local Chrome or Edge install** (`build-portfolio-pdf.js` uses

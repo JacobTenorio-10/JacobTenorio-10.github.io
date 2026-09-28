@@ -56,7 +56,7 @@ def main():
 
             page.replace_image(xref, stream=new_bytes)
 
-    doc.save(PDF_PATH + ".tmp", garbage=4, deflate=True)
+    doc.save(PDF_PATH + ".tmp", garbage=4, deflate=True, clean=True)
     doc.close()
 
     import os
