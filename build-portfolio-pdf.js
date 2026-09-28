@@ -202,7 +202,7 @@ function renderProjectPage(project) {
         <h3 class="project-title">${escapeHtml(project.title)}</h3>
         <div class="project-title-rule"></div>
         <div class="project-tags">${project.tags.map((tag) => `<span class="project-tag">${escapeHtml(tag)}</span>`).join('')}</div>
-        ${project.credit ? `<p class="project-credit">${escapeHtml(project.credit)}</p>` : ''}
+        ${project.credit ? `<p class="project-credit">AIAA Design/Build/Fly Design Report &mdash; ${escapeHtml(project.credit)}</p>` : ''}
       </div>
       <div class="project-images-row">${imagesHTML}</div>
       <div class="project-columns">${columnsHTML}</div>
